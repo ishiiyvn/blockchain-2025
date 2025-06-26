@@ -65,6 +65,16 @@ async function main() {
   console.log(`VITE_LOAN_TOKEN_ADDRESS=${await loanToken.getAddress()}`);
   console.log(`VITE_LENDING_PROTOCOL_ADDRESS=${await lendingProtocol.getAddress()}`);
 
+  // Write contract addresses to web_app/.env
+  const envPath = path.join(__dirname, '..', 'web_app', '.env');
+  const envContent = 
+    `VITE_COLLATERAL_TOKEN_ADDRESS=${await collateralToken.getAddress()}\n` +
+    `VITE_LOAN_TOKEN_ADDRESS=${await loanToken.getAddress()}\n` +
+    `VITE_LENDING_PROTOCOL_ADDRESS=${await lendingProtocol.getAddress()}\n`;
+
+  fs.writeFileSync(envPath, envContent);
+  console.log(`✅ Wrote contract addresses to web_app/.env`);
+
   // Copy ABI files to frontend after deployment
   function copyABI(contractName) {
     const artifactPath = path.join(__dirname, '..', 'artifacts', 'contracts', `${contractName}.sol`, `${contractName}.json`);

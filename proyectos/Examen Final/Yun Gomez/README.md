@@ -38,13 +38,11 @@ Before you begin, ensure you have the following installed:
 1.  **Clone the repository:**
 
     ```bash
-    git clone <repository_url>
-    cd <repository_directory>
+    git clone https://github.com/ishiiyvn/blockchain-2025.git
+    cd blockchain-2025/proyectos/Examen\ Final/Yun\ Gomez/
     ```
 
 2.  **Install dependencies for the smart contract:**
-
-    Navigate to the root directory of the project and install Hardhat and other necessary packages.
 
     ```bash
     npm install # or yarn install
@@ -72,7 +70,7 @@ Before you begin, ensure you have the following installed:
     cp .env.example .env
     # Then edit .env
     ```
-    Make sure to install the `dotenv` package if the Hardhat configuration uses it (`npm install dotenv --save-dev`).
+    Make sure to install the `dotenv` package (`npm install dotenv --save-dev`).
 
 2.  **Compile the smart contracts:**
 
@@ -80,7 +78,25 @@ Before you begin, ensure you have the following installed:
     npx hardhat compile
     ```
 
-3.  **Deploy the contracts:**
+3.  **Run the smart contract tests:**
+
+    To run the smart contract tests using Hardhat:
+
+    ```bash
+    npx hardhat test
+    ```
+    This will execute all tests in the `test/` directory and display the results in the console.
+
+4.  **Generate a test coverage report:**
+
+    To generate a test coverage report for your smart contracts:
+
+    ```bash
+    npm run coverage
+    ```
+    This will output a summary in the console and generate a detailed coverage report in the `coverage/` directory.
+
+5.  **Deploy the contracts:**
 
     Use the provided deployment script and specify the target network using the `--network` flag. This will deploy the contracts to the network configured in the `hardhat.config.js` file under the specified network name.
 
@@ -104,6 +120,8 @@ Before you begin, ensure you have the following installed:
 
     - The deployment script (`scripts/deploy.js`) automatically saves the ABI files for LendingProtocol, CollateralToken, and LoanToken to `web_app/src/contracts/` after deployment.
     - Ensure the addresses in your frontend `.env` match the deployed contracts.
+
+    **⚠️ Warning:** This process will overwrite any existing ABI files in `web_app/src/contracts/` and will also update (overwrite) the contract addresses in `web_app/.env`. If you have made manual changes to these files, they will be lost after each deployment.
 
 2.  **(Optional) ABI Automation:**
 
@@ -133,28 +151,6 @@ Before you begin, ensure you have the following installed:
 - **Withdraw Collateral:** Withdraw your cUSD collateral (if you have no outstanding debt).
 - **View Protocol Stats:** See total collateral, total loans, and available liquidity.
 - **Live Portfolio:** View your balances, debt, accrued interest, and collateralization ratio.
-
----
-
-## Running Tests
-
-To run the smart contract tests using Hardhat:
-
-```bash
-npx hardhat test
-```
-
-This will execute all tests in the `test/` directory and display the results in the console.
-
-## Coverage
-
-To generate a test coverage report for your smart contracts:
-
-```bash
-npm run coverage
-```
-
-This will output a summary in the console and generate a detailed coverage report in the `coverage/` directory.
 
 ---
 
